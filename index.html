@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lombok.Wanderlust - Your Unforgettable Sailing Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Fade-out and fade-in transitions for slider updates */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transition: opacity 0.5s ease-in;
+        }
+        .teal-gradient {
+            background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .gallery-item {
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        /* New Animation Keyframes */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Utility classes for animations */
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.6s ease-out forwards;
+        }
+
+        /* Back to Top Button Styles */
+        #backToTop {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #14b8a6;
+            color: #ffffff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 100;
+        }
+
+        #backToTop:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="font-inter">
+    <!-- Header -->
+    <header class="bg-white shadow-sm fixed w-full top-0 z-50" role="banner">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center" role="navigation" aria-label="Main navigation">
+            <div class="text-2xl font-bold text-teal-600 font-playfair" role="img" aria-label="Eastiopia logo">
+                <a href="index.html" class="hover:text-teal-700 transition-colors">Lombok Wanderlust</a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-gray-700 hover:text-teal-600 font-medium transition-colors" aria-label="Home page">Home</a>
+                <a href="Tour-Package.html" class="text-gray-700 hover:text-teal-600 font-medium transition-colors" aria-label="Tour packages">Tour Package</a>
+                <a href="Phinisi-Boat.html" class="text-gray-700 hover:text-teal-600 font-medium transition-colors" aria-label="Phinisi boats">Phinisi Boat</a>
+                <a href="Destinations.html" class="text-gray-700 hover:text-teal-600 font-medium transition-colors" aria-label="Destinations">Destinations</a>
+                <a href="Contact.html" class="text-gray-700 hover:text-teal-600 font-medium transition-colors" aria-label="Contact us">Contact Us</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden" aria-label="Open mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span class="sr-only">Menu</span>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative animate-fade-in">
+        <!-- Navigation Arrows -->
+        <button id="prevSlide" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-teal-500 hover:bg-teal-600 text-white p-3 rounded-full transition-colors" aria-label="Previous Slide">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+        <button id="nextSlide" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-teal-500 hover:bg-teal-600 text-white p-3 rounded-full transition-colors" aria-label="Next Slide">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+
+        <div class="text-center text-white px-4">
+            <h1 class="text-5xl md:text-7xl font-bold font-playfair mb-4">Lombok.Wanderlust</h1>
+            <p class="text-xl md:text-2xl font-light">Your friendly sailing partner</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+                <div class="teal-gradient text-white text-center py-8">
+                    <div class="flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <h2 class="text-3xl font-bold font-playfair">Find Your Holiday</h2>
+                    </div>
+                </div>
+                <div class="p-8 space-y-6">
+                    <div>
+                        <select class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                            <option>Open Trip</option>
+                            <option>Private Trip</option>
+                            <option>Custom Trip</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                            <option>Tour Duration</option>
+                            <option>1-2 Days</option>
+                            <option>3-4 Days</option>
+                            <option>5+ Days</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent">
+                            <option>max budget / pax</option>
+                            <option>Under IDR 2,000K</option>
+                            <option>IDR 2,000K - 5,000K</option>
+                            <option>Above IDR 5,000K</option>
+                        </select>
+                    </div>
+                    <button class="w-full teal-gradient text-white py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity">
+                        Search Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Info Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <div class="w-96 h-96 mx-auto teal-gradient rounded-full flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="mb-4">
+                                <svg class="w-24 h-24 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M3 18h18v-2H3v2zm6.31-8.24l.41-.17c.38-.16.59-.47.59-.84V6.5c0-.83-.67-1.5-1.5-1.5S7.31 5.67 7.31 6.5v2.25c0 .37.21.68.59.84l.41.17c.38.16.59.47.59.84v.9c0 .28.22.5.5.5s.5-.22.5-.5v-.9c0-.37-.21-.68-.59-.84zM12 3L2 12h3v8h14v-8h3L12 3z"/>
+                                </svg>
+                            </div>
+                            <h2 class="text-4xl font-bold font-playfair mb-2">Lombok.Wanderlust</h2>
+                            <p class="text-lg">Your Unforgettable Sailing Partner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="text-center mb-8">
+                        <h3 class="text-teal-600 text-lg font-semibold mb-2">Get To Know Us</h3>
+                        <h2 class="text-4xl font-bold font-playfair text-gray-800 mb-6">Explore All Tour Of The World With Us.</h2>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed text-justify">
+                        Eastiopia is a travel company specializing in phinisi boat tours to the breathtaking destinations of Komodo and Raja Ampat. Offering a unique blend of adventure and luxury, Eastiopia provides unforgettable voyages through Indonesia's pristine waters, showcasing stunning landscapes, vibrant marine life, and rich cultural experiences. Whether exploring the islands of Komodo or diving in the coral-rich seas of Raja Ampat, Eastiopia ensures a remarkable journey for travelers seeking adventure, relaxation, and natural beauty.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phinisi Boat Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-yellow-500 text-lg font-semibold mb-2">Ship</h3>
+                <h2 class="text-4xl font-bold font-playfair text-gray-800">Phinisi <span class="text-teal-600">Boat</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-teal-400 to-teal-600 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-4 py-2 rounded-full text-sm font-semibold">Medium Phinisi</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Phinisi</p>
+                        <h3 class="text-2xl font-bold font-playfair text-gray-800 mb-4">Jofiel Phinisi</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 32,100 K <span class="text-gray-500 font-normal">| pax</span></p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-blue-400 to-blue-600 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-4 py-2 rounded-full text-sm font-semibold">Medium Phinisi</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Phinisi</p>
+                        <h3 class="text-2xl font-bold font-playfair text-gray-800 mb-4">Sands Bajo Phinisi</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 46,000 K <span class="text-gray-500 font-normal">| pax</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour Packages Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-yellow-500 text-lg font-semibold mb-2">Package</h3>
+                <h2 class="text-4xl font-bold font-playfair text-gray-800">Tour <span class="text-teal-600">Package</span></h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Komodo Tours -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-green-400 to-green-600 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                1 Days Tours
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Open Trip</p>
+                        <h3 class="text-xl font-bold font-playfair text-gray-800 mb-4">Open Trip Sailing Komodo 1 Day</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 1,450 K <span class="text-gray-500 font-normal">| pax</span></p>
+                        <div class="mt-4">
+                            <a href="Tour-Package.html" 
+                               class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors" 
+                               aria-label="View details for Open Trip Sailing Komodo 1 Day">
+                               View Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-blue-400 to-blue-600 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                3 Days Tours
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Open Trip</p>
+                        <h3 class="text-xl font-bold font-playfair text-gray-800 mb-4">Open Trip 3D 2N Sailing Journey Of</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 2,800 K <span class="text-gray-500 font-normal">| pax</span></p>
+                        <div class="mt-4">
+                            <a href="Tour-Package.html" 
+                               class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors" 
+                               aria-label="View details for Open Trip 3D 2N Sailing Journey Of">
+                               View Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-teal-400 to-teal-600 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                2 Days Tours
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Open Trip</p>
+                        <h3 class="text-xl font-bold font-playfair text-gray-800 mb-4">Open Trip 2D 1N Sailing Journey Of</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 2,250 K <span class="text-gray-500 font-normal">| pax</span></p>
+                        <div class="mt-4">
+                            <a href="Tour-Package.html" 
+                               class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors" 
+                               aria-label="View details for Open Trip 2D 1N Sailing Journey Of">
+                               View Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sumba Tours -->
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-orange-400 to-orange-600 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <h3 class="text-3xl font-bold font-playfair mb-2">SUMBA</h3>
+                                <p class="text-sm">OPEN TRIP 4DAY 3 NIGHT</p>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                4 Days Tours
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Open Trip</p>
+                        <h3 class="text-xl font-bold font-playfair text-gray-800 mb-4">Open Trip 4D3N Sumba</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 3,000 K <span class="text-gray-500 font-normal">| pax</span></p>
+                        <div class="mt-4">
+                            <a href="Tour-Package.html" 
+                               class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors" 
+                               aria-label="View details for Open Trip 4D3N Sumba">
+                               View Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-gray-600 to-gray-800 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <h3 class="text-3xl font-bold font-playfair mb-2">SUMBA</h3>
+                                <p class="text-sm">OVERLAND</p>
+                                <p class="text-sm">4D3N & 5D4N</p>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                4 Days Tours
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Private Trip</p>
+                        <h3 class="text-xl font-bold font-playfair text-gray-800 mb-4">Overland 4D3N SUMBA</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 3,200 K <span class="text-gray-500 font-normal">| pax</span></p>
+                        <div class="mt-4">
+                            <a href="Tour-Package.html" 
+                               class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors" 
+                               aria-label="View details for Overland 4D3N SUMBA">
+                               View Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-gray-700 to-gray-900 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <h3 class="text-3xl font-bold font-playfair mb-2">SUMBA</h3>
+                                <p class="text-sm">OVERLAND</p>
+                                <p class="text-sm">4D3N & 5D4N</p>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                5 Days Tours
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Private Trip</p>
+                        <h3 class="text-xl font-bold font-playfair text-gray-800 mb-4">Overland 5D4N SUMBA</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 3,500 K <span class="text-gray-500 font-normal">| pax</span></p>
+                        <div class="mt-4">
+                            <a href="Tour-Package.html" 
+                               class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors" 
+                               aria-label="View details for Overland 5D4N SUMBA">
+                               View Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Private Charter -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-teal-400 to-teal-600 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                1 - 4 Days Tours
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Private Trip</p>
+                        <h3 class="text-xl font-bold font-playfair text-gray-800 mb-4">Private Charter Standar Phinisi</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 19,250 K</p>
+                        <div class="mt-4">
+                            <a href="Tour-Package.html" 
+                               class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors" 
+                               aria-label="View details for Private Charter Standar Phinisi">
+                               View Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-blue-400 to-blue-600 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                1 - 4 Days Tours
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Private Trip</p>
+                        <h3 class="text-xl font-bold font-playfair text-gray-800 mb-4">Private Charter Superior Phinisi</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 37,400 K</p>
+                        <div class="mt-4">
+                            <a href="Tour-Package.html" 
+                               class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors" 
+                               aria-label="View details for Private Charter Superior Phinisi">
+                               View Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover animate-slide-up">
+                    <div class="h-64 bg-gradient-to-br from-green-400 to-green-600 relative">
+                        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                1 - 4 Days Tours
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-teal-600 font-semibold mb-2">Private Trip</p>
+                        <h3 class="text-xl font-bold font-playfair text-gray-800 mb-4">Private Charter Medium Phinisi</h3>
+                        <p class="text-teal-600 font-semibold">From IDR 29,700 K</p>
+                        <div class="mt-4">
+                            <a href="Tour-Package.html" 
+                               class="bg-teal-500 hover:bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors" 
+                               aria-label="View details for Private Charter Medium Phinisi">
+                               View Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-yellow-500 text-lg font-semibold mb-2">Our Gallery</h3>
+                <h2 class="text-4xl font-bold font-playfair text-gray-800">Some Beautiful <span class="text-teal-600">Snapshots</span></h2>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Row 1 -->
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Beautiful sailing boat on crystal clear water" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Stunning ocean view with turquoise waters" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Breathtaking sunset over the horizon" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Traditional boat anchored in calm waters" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Tropical island paradise with palm trees" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Underwater coral reef with vibrant marine life" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1430676/pexels-photo-1430676.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1430676/pexels-photo-1430676.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Scenic coastal landscape with rocky cliffs" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1174732/pexels-photo-1174732.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1174732/pexels-photo-1174732.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Pristine beach with white sand and clear water" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                
+                <!-- Row 3 -->
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Majestic mountain view from the sea" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1007657/pexels-photo-1007657.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1007657/pexels-photo-1007657.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Colorful fish swimming in tropical waters" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1320684/pexels-photo-1320684.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1320684/pexels-photo-1320684.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Dramatic seascape with waves crashing" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1591373/pexels-photo-1591373.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Peaceful lagoon surrounded by lush vegetation" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                
+                <!-- Row 4 -->
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Vibrant underwater ecosystem" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1761279/pexels-photo-1761279.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1761279/pexels-photo-1761279.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Golden hour sailing adventure" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1533720/pexels-photo-1533720.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1533720/pexels-photo-1533720.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Serene bay with anchored boats" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+                <div class="gallery-item cursor-pointer" data-full="https://images.pexels.com/photos/1430677/pexels-photo-1430677.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                    <img src="https://images.pexels.com/photos/1430677/pexels-photo-1430677.jpeg?auto=compress&cs=tinysrgb&w=400&h=400" alt="Spectacular coastal cliff formations" class="w-full aspect-square object-cover rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16" role="contentinfo">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 text-teal-400 mr-4 flex items-center justify-center" role="img" aria-label="Eastiopia boat logo">
+                            <div class="relative">
+                                <div class="w-8 h-4 bg-current rounded-t-full"></div>
+                                <div class="w-10 h-1 bg-current mx-auto"></div>
+                                <div class="w-6 h-3 bg-current mx-auto rounded-b-lg"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold font-playfair text-teal-400">Lombok.Wanderlust</h3>
+                            <p class="text-sm text-gray-400">Your Unforgettable Sailing Partner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        Whether exploring the islands of Komodo or diving in the coral-rich seas of Raja Ampat, Eastiopia ensures a remarkable journey for travelers seeking adventure, relaxation, and natural beauty
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <nav aria-label="Footer navigation">
+                    <h4 class="text-xl font-bold font-playfair mb-6">Quick Link</h4>
+                    <ul class="space-y-3" role="list">
+                        <li role="listitem"><a href="Tour-Package.html" class="text-gray-300 hover:text-teal-400 transition-colors">Tour Package</a></li>
+                        <li role="listitem"><a href="Phinisi-Boat.html" class="text-gray-300 hover:text-teal-400 transition-colors">Phinisi Boat</a></li>
+                        <li role="listitem"><a href="Destinations.html" class="text-gray-300 hover:text-teal-400 transition-colors">Destination</a></li>
+                        <li role="listitem"><a href="Contact.html" class="text-gray-300 hover:text-teal-400 transition-colors">Contact Us</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Promotion -->
+                <nav aria-label="Promotional offers">
+                    <h4 class="text-xl font-bold font-playfair mb-6">Promotion</h4>
+                    <ul class="space-y-3" role="list">
+                        <li role="listitem"><a href="#" class="text-gray-300 hover:text-teal-400 transition-colors">Open Trip 3D 2N Sailing</a></li>
+                        <li role="listitem"><a href="#" class="text-gray-300 hover:text-teal-400 transition-colors">Open Trip 2D 1N</a></li>
+                        <li role="listitem"><a href="#" class="text-gray-300 hover:text-teal-400 transition-colors">Overland 5D4N SUMBA</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400" role="contentinfo">2024 eastiopia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Gallery Modal Popup -->
+    <div id="galleryModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 hidden">
+        <div class="relative max-w-4xl max-h-screen p-4">
+            <img id="modalImage" src="" alt="Enlarged gallery image" class="max-w-full max-h-full rounded-lg animate-fade-in">
+            <button id="modalCloseBtn" aria-label="Close gallery image" class="absolute top-2 right-2 text-white bg-teal-600 hover:bg-teal-700 rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl transition-colors">
+                &times;
+            </button>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" aria-label="Back to Top" style="display: none;">
+        Back To Top
+    </button>
+
+    <!-- JavaScript for Gallery Modal, Back-to-Top, and Hero Slider Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Hero Slider Functionality
+                const sliderImages = [
+                    'https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                    'https://images.pexels.com/photos/164634/pexels-photo-164634.jpeg?auto=compress&cs=tinysrgb&w=1200',
+                    'https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg?auto=compress&cs=tinysrgb&w=1200'
+                ];
+                let currentSlideIndex = 0;
+                const heroSection = document.querySelector('.hero-bg');
+                const prevBtn = document.getElementById('prevSlide');
+                const nextBtn = document.getElementById('nextSlide');
+                const slideDuration = 5000; // 5 seconds
+
+                // Function to update slide with fade transition
+                function updateSlide() {
+                    try {
+                        // Step 1: Fade out hero section
+                        heroSection.classList.add('fade-out');
+                        
+                        // Wait for fade-out animation before updating background
+                        setTimeout(function() {
+                            try {
+                                // Update background with gradient overlay and new image
+                                heroSection.style.backgroundImage = 'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(' + sliderImages[currentSlideIndex] + ')';
+                                
+                                // Remove fade-out and fade in smoothly
+                                heroSection.classList.remove('fade-out');
+                                heroSection.classList.add('fade-in');
+
+                                // Remove fade-in class after the transition
+                                setTimeout(function() {
+                                    heroSection.classList.remove('fade-in');
+                                }, 500);
+                            } catch(error) {
+                                console.error('Error updating background image:', error);
+                            }
+                        }, 500);
+                    } catch (error) {
+                        console.error('Error updating slide:', error);
+                    }
+                }
+
+                // Event listener for previous slide
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', function() {
+                        try {
+                            currentSlideIndex = (currentSlideIndex - 1 + sliderImages.length) % sliderImages.length;
+                            updateSlide();
+                        } catch(error) {
+                            console.error('Error switching to previous slide:', error);
+                        }
+                    });
+                }
+
+                // Event listener for next slide
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', function() {
+                        try {
+                            currentSlideIndex = (currentSlideIndex + 1) % sliderImages.length;
+                            updateSlide();
+                        } catch(error) {
+                            console.error('Error switching to next slide:', error);
+                        }
+                    });
+                }
+
+                // Initialize first slide on page load
+                updateSlide();
+
+                // Auto-slide functionality
+                setInterval(function() {
+                    try {
+                        currentSlideIndex = (currentSlideIndex + 1) % sliderImages.length;
+                        updateSlide();
+                    } catch(error) {
+                        console.error('Error in auto-slide transition:', error);
+                    }
+                }, slideDuration);
+
+                // Gallery Modal Functionality
+                const galleryItems = document.querySelectorAll('.gallery-item');
+                const galleryModal = document.getElementById('galleryModal');
+                const modalImage = document.getElementById('modalImage');
+                const modalCloseBtn = document.getElementById('modalCloseBtn');
+                
+                // Add click events to each gallery item
+                galleryItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        try {
+                            const imgSrc = this.getAttribute('data-full');
+                            const imgAlt = this.querySelector('img').getAttribute('alt');
+                            if (imgSrc) {
+                                openModal(imgSrc, imgAlt);
+                            }
+                        } catch(error) {
+                            console.error('Error opening gallery modal:', error);
+                        }
+                    });
+                });
+                
+                // Function to open modal
+                function openModal(imgSrc, imgAlt) {
+                    try {
+                        modalImage.src = imgSrc;
+                        modalImage.alt = imgAlt || 'Enlarged gallery image';
+                        galleryModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    } catch (error) {
+                        console.error('Error opening modal:', error);
+                    }
+                }
+                
+                // Function to close modal
+                function closeModal() {
+                    try {
+                        galleryModal.classList.add('hidden');
+                        document.body.style.overflow = ''; // Restore scrolling
+                        modalImage.src = ''; // Clear image source
+                    } catch (error) {
+                        console.error('Error closing modal:', error);
+                    }
+                }
+                
+                // Attach event to close button
+                if (modalCloseBtn) {
+                    modalCloseBtn.addEventListener('click', closeModal);
+                }
+                
+                // Close modal when clicking outside the image area (backdrop)
+                if (galleryModal) {
+                    galleryModal.addEventListener('click', function(e) {
+                        if (e.target === galleryModal) {
+                            closeModal();
+                        }
+                    });
+                }
+                
+                // Close modal with Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && !galleryModal.classList.contains('hidden')) {
+                        closeModal();
+                    }
+                });
+
+                // Back to Top Button Functionality
+                const backToTopBtn = document.getElementById('backToTop');
+
+                // Function to toggle button visibility based on scroll position
+                function toggleBackToTop() {
+                    try {
+                        if (window.scrollY > 300) {
+                            backToTopBtn.style.display = 'block';
+                        } else {
+                            backToTopBtn.style.display = 'none';
+                        }
+                    } catch(error) {
+                        console.error('Error toggling back to top button:', error);
+                    }
+                }
+
+                // Listen for scroll events
+                window.addEventListener('scroll', toggleBackToTop);
+
+                // Scroll to top on button click with smooth behavior
+                if (backToTopBtn) {
+                    backToTopBtn.addEventListener('click', function() {
+                        try {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        } catch(error) {
+                            console.error('Error during smooth scroll:', error);
+                        }
+                    });
+                }
+
+            } catch(error) {
+                console.error('Error initializing page functionality:', error);
+            }
+        });
+    </script>
+</body>
+</html>
